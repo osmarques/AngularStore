@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { CurrencyBrPipe } from '../../pipes/currency-br.pipe';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, RouterModule, CurrencyBrPipe],
+  imports: [CommonModule, RouterModule, CurrencyBrPipe, TruncatePipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css'
 })

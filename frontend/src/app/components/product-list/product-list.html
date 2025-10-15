@@ -32,7 +32,7 @@
             <span class="product-price">{{ product.price | currencyBr }}</span>
           </div>
           
-          <p class="product-description">{{ product.description || 'Sem descrição' }}</p>
+          <p class="product-description">{{ (product.description || 'Sem descrição') | truncate:25 }}</p>
           
           <div class="product-info">
             <span class="stock-badge" [class.low-stock]="product.stock < 10">
