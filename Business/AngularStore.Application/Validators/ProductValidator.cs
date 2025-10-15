@@ -20,7 +20,7 @@ public class CreateProductDtoValidator : AbstractValidator<CreateProductDto>
 
         RuleFor(x => x.Stock)
             .NotNull().WithMessage("Estoque é obrigatório")
-            .GreaterThan(0).WithMessage("Estoque deve ser maior que zero");
+            .GreaterThanOrEqualTo(0).WithMessage("Estoque deve ser maior ou igual a zero");
     }
 }
 
@@ -41,6 +41,6 @@ public class UpdateProductDtoValidator : AbstractValidator<UpdateProductDto>
 
         RuleFor(x => x.Stock)
             .NotNull().WithMessage("Estoque é obrigatório")
-            .GreaterThan(0).WithMessage("Estoque deve ser maior que zero");
+            .GreaterThanOrEqualTo(0).WithMessage("Estoque deve ser maior ou igual a zero");
     }
 }

@@ -64,7 +64,16 @@ export class ProductService {
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Erro: ${error.error.message}`;
     } else {
-      errorMessage = `Código: ${error.status}, Mensagem: ${error.message}`;
+      // Tenta extrair mensagem específica da API
+      if (error.error?.error) {
+        errorMessage = error.error.error;
+      } else if (error.error?.message) {
+        errorMessage = error.error.message;
+      } else if (typeof error.error === 'string') {
+        errorMessage = error.error;
+      } else {
+        errorMessage = `Erro ${error.status}: ${error.statusText || 'Erro na requisição'}`;
+      }
     }
     
     return throwError(() => errorMessage);

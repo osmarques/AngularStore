@@ -64,21 +64,21 @@
             💰 Preço *
           </label>
           <div class="input-group">
-            <span class="input-prefix">R$</span>
+            <span class="input-prefix">{{ currencySymbol }}</span>
             <input
-              type="number"
+              type="text"
               id="price"
               formControlName="price"
               class="form-control"
-              step="0.01"
-              min="0.01"
-              placeholder="Digite o preço"
+              [placeholder]="'Ex: 10' + decimalSeparator + '50'"
+              (input)="onPriceInput($event)"
               [class.error]="productForm.get('price')?.invalid && productForm.get('price')?.touched"
             >
           </div>
           <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
             <span *ngIf="productForm.get('price')?.errors?.['required']">Preço é obrigatório</span>
             <span *ngIf="productForm.get('price')?.errors?.['min']">Preço deve ser maior que zero</span>
+            <span *ngIf="productForm.get('price')?.errors?.['maxDecimals']">Preço deve ter no máximo 2 casas decimais</span>
           </div>
         </div>
 
@@ -87,17 +87,18 @@
             📦 Estoque *
           </label>
           <input
-            type="number"
+            type="text"
             id="stock"
             formControlName="stock"
             class="form-control"
-            min="0"
             placeholder="Digite o estoque"
+            (input)="onStockInput($event)"
             [class.error]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
           >
           <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="error-message">
             <span *ngIf="productForm.get('stock')?.errors?.['required']">Estoque é obrigatório</span>
-            <span *ngIf="productForm.get('stock')?.errors?.['min']">Estoque deve ser maior que zero</span>
+            <span *ngIf="productForm.get('stock')?.errors?.['min']">Estoque deve ser maior ou igual a zero</span>
+            <span *ngIf="productForm.get('stock')?.errors?.['integer']">Estoque deve ser um número inteiro</span>
           </div>
         </div>
       </div>

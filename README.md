@@ -140,10 +140,3 @@ O frontend foi desenvolvido com design mobile-first e é totalmente responsivo:
 | POST   | `/api/products`      | Criar produto     |
 | PUT    | `/api/products/{id}` | Atualizar produto |
 | DELETE | `/api/products/{id}` | Excluir produto   |
-
-## 🧪 Executar Testes
-
-```bash
-cd "Tests/AngularStore.Tests"
-dotnet test
-```
