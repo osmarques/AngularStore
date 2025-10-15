@@ -24,11 +24,9 @@ npm install -g @angular/cli
 ### 1. Backend (.NET API)
 
 ```bash
-# Navegar para o diretório da API ex: cd C:\projetos\AngularStore
+# Navegar para o diretório da API conforme o exemplo abaixo
 
-
-#Naveegar ate a pasta da API
-cd "API/AngularStore.Api"
+cd "C:\projetos\AngularStoreAPI\AngularStore.Api"
 
 # Restaurar dependências
 dotnet restore
@@ -38,6 +36,7 @@ dotnet run
 ```
 
 **URLs do Backend:**
+
 - API: https://localhost:7000
 - Swagger: https://localhost:7000/swagger
 
@@ -55,6 +54,7 @@ ng serve
 ```
 
 **URL do Frontend:**
+
 - Aplicação: http://localhost:7085
 
 ## 🎯 Funcionalidades
@@ -83,21 +83,25 @@ AngularStore/
 ## 🔧 Configurações
 
 ### Portas
+
 - **Backend**: 7000 (HTTPS) / 5000 (HTTP)
 - **Frontend**: 7085
 
 ### CORS
+
 O backend está configurado para aceitar requisições do frontend nas portas 7085 e 4200.
 
 ## 📊 Dados de Exemplo
 
 A aplicação já vem com produtos de exemplo:
+
 - Notebook Dell - R$ 2.500,00
 - Mouse Logitech - R$ 50,00
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
+
 - .NET 8
 - Entity Framework Core
 - Swagger/OpenAPI
@@ -105,6 +109,7 @@ A aplicação já vem com produtos de exemplo:
 - FluentValidation
 
 ### Frontend
+
 - Angular 20
 - TypeScript
 - RxJS
@@ -114,6 +119,7 @@ A aplicação já vem com produtos de exemplo:
 ## 📱 Design Responsivo
 
 O frontend foi desenvolvido com design mobile-first e é totalmente responsivo:
+
 - 📱 **Mobile**: < 480px
 - 📱 **Tablet**: 480px - 768px
 - 💻 **Desktop**: > 768px
@@ -127,13 +133,13 @@ O frontend foi desenvolvido com design mobile-first e é totalmente responsivo:
 
 ## 📝 API Endpoints
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/api/products` | Listar produtos |
-| GET | `/api/products/{id}` | Obter produto |
-| POST | `/api/products` | Criar produto |
-| PUT | `/api/products/{id}` | Atualizar produto |
-| DELETE | `/api/products/{id}` | Excluir produto |
+| Método | Endpoint             | Descrição         |
+| ------ | -------------------- | ----------------- |
+| GET    | `/api/products`      | Listar produtos   |
+| GET    | `/api/products/{id}` | Obter produto     |
+| POST   | `/api/products`      | Criar produto     |
+| PUT    | `/api/products/{id}` | Atualizar produto |
+| DELETE | `/api/products/{id}` | Excluir produto   |
 
 ## 🧪 Executar Testes
 
@@ -141,4 +147,3 @@ O frontend foi desenvolvido com design mobile-first e é totalmente responsivo:
 cd "Tests/AngularStore.Tests"
 dotnet test
 ```
-
