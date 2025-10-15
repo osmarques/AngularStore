@@ -72,13 +72,15 @@
               class="form-control"
               [placeholder]="'Ex: 10' + decimalSeparator + '50'"
               (input)="onPriceInput($event)"
-              [class.error]="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+              (keydown)="onPriceKeydown($event)"
+              [class.error]="(productForm.get('price')?.invalid && productForm.get('price')?.touched) || priceError"
             >
           </div>
-          <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
-            <span *ngIf="productForm.get('price')?.errors?.['required']">Preço é obrigatório</span>
-            <span *ngIf="productForm.get('price')?.errors?.['min']">Preço deve ser maior que zero</span>
-            <span *ngIf="productForm.get('price')?.errors?.['maxDecimals']">Preço deve ter no máximo 2 casas decimais</span>
+          <div *ngIf="(productForm.get('price')?.invalid && productForm.get('price')?.touched) || priceError" class="error-message">
+            <span *ngIf="priceError">{{ priceError }}</span>
+            <span *ngIf="!priceError && productForm.get('price')?.errors?.['required']">Preço é obrigatório</span>
+            <span *ngIf="!priceError && productForm.get('price')?.errors?.['min']">Preço deve ser maior que zero</span>
+            <span *ngIf="!priceError && productForm.get('price')?.errors?.['maxDecimals']">Preço deve ter no máximo 2 casas decimais</span>
           </div>
         </div>
 

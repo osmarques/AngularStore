@@ -19,6 +19,7 @@ export class ProductForm implements OnInit {
   decimalSeparator = '.';
   thousandsSeparator = ',';
   currencySymbol = 'R$';
+  priceError = '';
 
   constructor(
     private fb: FormBuilder,
@@ -174,6 +175,7 @@ export class ProductForm implements OnInit {
   onPriceInput(event: any): void {
     let value = event.target.value;
     const separator = this.decimalSeparator;
+    this.priceError = '';
     
     // Remove caracteres não numéricos exceto o separador decimal
     if (separator === ',') {
@@ -188,9 +190,12 @@ export class ProductForm implements OnInit {
       value = parts[0] + separator + parts.slice(1).join('');
     }
     
-    // Limita a 2 casas decimais
+    // Verifica se está tentando inserir mais de 2 casas decimais
     if (parts[1] && parts[1].length > 2) {
+      this.priceError = 'Preço deve ter no máximo 2 casas decimais';
       value = parts[0] + separator + parts[1].substring(0, 2);
+      // Bloqueia a entrada
+      event.preventDefault();
     }
     
     if (event.target.value !== value) {
@@ -199,6 +204,37 @@ export class ProductForm implements OnInit {
       const standardValue = separator === ',' ? value.replace(',', '.') : value;
       this.productForm.get('price')?.setValue(standardValue);
     }
+  }
+
+  // Evento keydown para bloquear entrada de 3ª casa decimal
+  onPriceKeydown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    const separator = this.decimalSeparator;
+    const key = event.key;
+    
+    // Se não é um número, permite teclas de controle
+    if (!/[0-9]/.test(key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(key)) {
+      if (key !== separator) {
+        event.preventDefault();
+        return;
+      }
+    }
+    
+    // Verifica se já tem separador decimal
+    const parts = value.split(separator);
+    if (parts.length > 1 && parts[1].length >= 2 && /[0-9]/.test(key)) {
+      // Se o cursor está após as 2 casas decimais, bloqueia
+      const cursorPos = input.selectionStart || 0;
+      const decimalPos = value.indexOf(separator);
+      if (cursorPos > decimalPos + 2) {
+        this.priceError = 'Preço deve ter no máximo 2 casas decimais';
+        event.preventDefault();
+        return;
+      }
+    }
+    
+    this.priceError = '';
   }
 
   // Formatar preço para exibição
