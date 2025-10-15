@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1 class="title">🛍️ AngularStore</h1>
+      <p class="subtitle">Gerencie seus produtos com facilidade</p>
+      <a routerLink="/products/new" class="btn btn-primary">
+        <span>➕</span> Novo Produto
+      </a>
+    </div>
+
+    <div *ngIf="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Carregando produtos...</p>
+    </div>
+
+    <div *ngIf="!loading && products.length === 0" class="empty-state">
+      <div class="empty-icon">📦</div>
+      <h3>Nenhum produto encontrado</h3>
+      <p>Comece adicionando seu primeiro produto!</p>
+      <a routerLink="/products/new" class="btn btn-primary">Adicionar Produto</a>
+    </div>
+
+    <div *ngIf="!loading && products.length > 0" class="products-section">
+      <div class="products-header">
+        <h2>Produtos ({{ products.length }})</h2>
+      </div>
+      
+      <div class="products-grid">
+        <div *ngFor="let product of products" class="product-card">
+          <div class="product-header">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <span class="product-price">{{ product.price | currencyBr }}</span>
+          </div>
+          
+          <p class="product-description">{{ product.description || 'Sem descrição' }}</p>
+          
+          <div class="product-info">
+            <span class="stock-badge" [class.low-stock]="product.stock < 10">
+              📦 {{ product.stock }} em estoque
+            </span>
+          </div>
+          
+          <div class="product-actions">
+            <a [routerLink]="['/products/edit', product.id]" class="btn btn-secondary">
+              ✏️ Editar
+            </a>
+            <button (click)="deleteProduct(product.id)" class="btn btn-danger">
+              🗑️ Excluir
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

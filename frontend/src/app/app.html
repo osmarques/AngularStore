@@ -1,0 +1,23 @@
+<div class="app">
+  <div *ngIf="checking" class="loading">
+    <div class="spinner"></div>
+    <p>Verificando conectividade...</p>
+  </div>
+
+  <div *ngIf="!checking && !backendAvailable">
+    <app-backend-error></app-backend-error>
+  </div>
+
+  <div *ngIf="!checking && backendAvailable">
+    <header class="header">
+      <h1>Angular Store</h1>
+      <nav>
+        <a routerLink="/products" routerLinkActive="active">Produtos</a>
+      </nav>
+    </header>
+    
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

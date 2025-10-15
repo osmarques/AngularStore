@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="error-card">
+    <div class="error-icon">⚠️</div>
+    <h1 class="error-title">Sistema Indisponível</h1>
+    <p class="error-message">
+      Ocorreu um erro ao carregar as informações.
+    </p>
+
+    <button 
+      (click)="checkConnection()" 
+      [disabled]="checking" 
+      class="btn btn-primary">
+      <span *ngIf="checking" class="spinner"></span>
+      {{ checking ? 'Verificando...' : '🔄 Tentar Novamente' }}
+    </button>
+  </div>
+</div>
